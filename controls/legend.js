@@ -10,16 +10,14 @@ export default class Legend extends Control {
         var radioLayers = ['pr', 'cd', 'csd', 'da', 'db'];
         this.radios = {};
         
-        //https://www.dyn-web.com/tutorials/object-literal/properties.php
         for (var k of radioLayers) {
             this.radios[k] = this.Node('rd' + k.toUpperCase());
         };
                 
-		this.current = 'csd';
+		this.current = 'csd'; //leave to specify default layer
 		
 		this.radios[this.current].checked = true;
 		
-        //https://www.w3schools.com/jsref/jsref_forin.asp
         for (var t in this.radios) {
             this.radios[t].addEventListener('change', this.onChange_Handler.bind(this, t));
         };        
@@ -34,10 +32,9 @@ export default class Legend extends Control {
 	
 	Template() {
         var radioHTML = "";
-        var radioLayers = ['pr', 'cd', 'csd', 'da', 'db'];
+        var radioLayers = ['pr', 'cd', 'csd', 'da', 'db']; // local array duplicate of array in line 10 not great...
         for (var  w of radioLayers) {
-            var h = w.toUpperCase();
-            radioHTML += "<label><input handle='rd" + h + "' type='radio' name='boundary'>nls(Label_" + h + ")</label>";
+            radioHTML += "<label><input handle='rd" + w.toUpperCase() + "' type='radio' name='boundary'>nls(Label_" + w.toUpperCase() + ")</label>";
         };
         
 		return "<div handle='root' class='legend mapboxgl-ctrl mapboxgl-ctrl-group'>" +
